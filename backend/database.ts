@@ -40,33 +40,34 @@ export async function getDatabase() {
       prismaProcess.stdout?.pipe(process.stdout);
     });
 
-    await prisma.character.deleteMany();
-    await prisma.user.deleteMany();
+    const count = await prisma.user.count();
 
-    const user = await prisma.user.create({
-      data: {
-        email: 'test@rains.cafe',
-        display_name: 'admin',
-        password: 'admin',
-      },
-    });
+    if (count === 0) {
+      const user = await prisma.user.create({
+        data: {
+          email: 'test@rains.cafe',
+          display_name: 'admin',
+          password: 'admin',
+        },
+      });
 
-    console.log(user.id);
+      console.log(user.id);
 
-    await prisma.character.createMany({
-      data: Array(200)
-        .fill(null)
-        .map<Omit<Character, 'id'>>((_, index) => ({
-          age: 21,
-          gender: 'female',
-          first_name: 'Luna',
-          last_name: 'Evergreen',
-          description:
-            'Luna has a long face, with black hair and bright blue eyes. She wears studded leather and wields a warhammer. Luna has a grey wolf named Ariendel.',
-          bio: '',
-          creator_id: user.id,
-        })),
-    });
+      await prisma.character.createMany({
+        data: Array(200)
+          .fill(null)
+          .map<Omit<Character, 'id'>>((_, index) => ({
+            age: 21,
+            gender: 'female',
+            first_name: 'Luna',
+            last_name: 'Evergreen',
+            description:
+              'Luna has a long face, with black hair and bright blue eyes. She wears studded leather and wields a warhammer. Luna has a grey wolf named Ariendel.',
+            bio: '',
+            creator_id: user.id,
+          })),
+      });
+    }
   }
 
   return prisma;
