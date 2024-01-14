@@ -1,6 +1,5 @@
 import { Character, Prisma, PrismaClient } from '@prisma/client';
 import { hashSync } from 'bcrypt';
-import { exec } from 'child_process';
 
 let initialized = false;
 
@@ -28,17 +27,6 @@ export const prisma = new PrismaClient().$extends(
 export async function getDatabase() {
   if (!initialized) {
     initialized = true;
-
-    await new Promise<void>((resolve, reject) => {
-      const prismaProcess = exec('bunx prisma migrate deploy', (error, stdout, stderr) => {
-        console.log(stdout, stderr);
-        if (error) reject(error);
-        else resolve();
-      });
-
-      prismaProcess.stderr?.pipe(process.stderr);
-      prismaProcess.stdout?.pipe(process.stdout);
-    });
 
     const count = await prisma.user.count();
 
