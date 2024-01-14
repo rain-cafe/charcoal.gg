@@ -1,6 +1,17 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+import { auth } from './api/auth/[...nextauth]/auth';
 
-export default function Home() {
-  return <main className={styles.main}>Content</main>;
+export default async function Home() {
+  const session = await auth();
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      {/* <Button
+        onClick={() => {
+          document.body.classList.toggle('dark');
+        }}
+      >
+        Hello!
+      </Button> */}
+    </main>
+  );
 }

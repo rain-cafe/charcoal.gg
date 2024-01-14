@@ -1,5 +1,4 @@
 import { getDatabase } from '@/backend/database';
-import { getOrAsNumber } from '@/backend/utils/params';
 import { NextResponse } from 'next/server';
 import { Context } from '../../types';
 
@@ -9,7 +8,7 @@ export async function GET(request: Request, context: Context<{ id: string }>) {
 
   let user = await db.user.findFirst({
     where: {
-      id: getOrAsNumber(context, 'id'),
+      id: context.params.id,
     },
   });
 

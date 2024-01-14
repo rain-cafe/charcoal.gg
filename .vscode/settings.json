@@ -23,5 +23,6 @@
   "editor.formatOnSaveMode": "file",
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "typescript.preferences.autoImportFileExcludePatterns": ["**/node_modules/@radix-ui/**"]
 }

@@ -1,30 +1,30 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "display_name" TEXT NOT NULL,
+    "image" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Character" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "age" INTEGER,
     "gender" TEXT,
     "first_name" TEXT,
     "last_name" TEXT,
     "description" TEXT,
     "bio" TEXT,
-    "creator_id" INTEGER NOT NULL,
+    "creator_id" TEXT NOT NULL,
 
     CONSTRAINT "Character_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Plugin" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "template" TEXT NOT NULL,
 
@@ -33,8 +33,8 @@ CREATE TABLE "Plugin" (
 
 -- CreateTable
 CREATE TABLE "CharacterPlugin" (
-    "character_id" INTEGER NOT NULL,
-    "plugin_id" INTEGER NOT NULL,
+    "character_id" TEXT NOT NULL,
+    "plugin_id" TEXT NOT NULL,
     "data" TEXT NOT NULL,
 
     CONSTRAINT "CharacterPlugin_pkey" PRIMARY KEY ("character_id","plugin_id")
