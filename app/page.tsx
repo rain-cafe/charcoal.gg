@@ -1,17 +1,16 @@
-import { auth } from './api/auth/[...nextauth]/auth';
+import { CharacterService } from '@/backend/services/character.service';
+import { CharacterCard } from '@/components/CharacterCard';
 
 export default async function Home() {
-  const session = await auth();
+  const characters = await CharacterService.search({
+    size: 10,
+  });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* <Button
-        onClick={() => {
-          document.body.classList.toggle('dark');
-        }}
-      >
-        Hello!
-      </Button> */}
-    </main>
+    <div className="grid gap-4">
+      {characters.map((character) => (
+        <CharacterCard key={character.id} character={character} />
+      ))}
+    </div>
   );
 }

@@ -1,10 +1,6 @@
-'use client';
-import { cn } from '@/lib/utils';
 import { classNames } from '@rain-cafe/react-utils';
 import { Alice } from 'next/font/google';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import * as styles from './Header.module.css';
 import { Profile } from './Profile';
 
 const font = Alice({
@@ -14,25 +10,9 @@ const font = Alice({
 });
 
 export function Header() {
-  const [isPinned, setIsPinned] = useState(false);
-
-  useEffect(() => {
-    const listener = () => {
-      setIsPinned(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', listener, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  }, []);
-
   return (
-    <div className={cn(styles.navbar, isPinned && styles.pinned)}>
-      <Link className={classNames(styles.title, font.className)} href="/">
+    <div className={'sticky top-0 flex bg-secondary justify-between items-center px-4 py-2 sm:px-6 gap-4'}>
+      <Link className={classNames('font-extrabold text-3xl', font.className)} href="/">
         Charcoal
       </Link>
       <Profile />
