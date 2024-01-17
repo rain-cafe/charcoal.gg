@@ -2,7 +2,7 @@
 
 version: '3.8'
 services:
-  postgres_db:
+  charcoal_db_local:
     image: postgres:13.5
     container_name: charcoal-db-local
     restart: always
