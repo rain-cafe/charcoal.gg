@@ -3,11 +3,11 @@ import { CharacterCard } from '@/components/CharacterCard';
 
 export default async function Home() {
   const characters = await CharacterService.search({
-    size: 10,
+    size: 16,
   });
 
   return (
-    <div className="grid gap-4">
+    <div className="flex flex-wrap justify-center gap-4">
       {characters.map((character) => (
         <CharacterCard key={character.id} character={character} />
       ))}

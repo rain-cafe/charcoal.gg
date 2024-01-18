@@ -13,19 +13,27 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 
-export function Profile() {
+export type ProfileProps = {
+  className?: string;
+};
+
+export function Profile({ className }: ProfileProps) {
   const { data: session } = useSession();
 
   if (!session || !session.user) {
-    return <Button onClick={() => signIn()}>Log in</Button>;
+    return (
+      <Button className={className} onClick={() => signIn()}>
+        Log in
+      </Button>
+    );
   }
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className={className}>
         <Avatar>
           {session.user.image && <AvatarImage src={session.user.image} />}
-          <AvatarFallback>
+          <AvatarFallback className="transition-colors hover:bg-secondary/80">
             <UserRound />
           </AvatarFallback>
         </Avatar>
