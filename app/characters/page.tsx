@@ -7,7 +7,7 @@ export default async function Characters() {
   });
 
   return (
-    <div className="flex flex-wrap justify-center gap-4">
+    <div className="flex flex-wrap bg-background/70 rounded-lg p-8 justify-center gap-4">
       {characters.map((character) => (
         <CharacterCard key={character.id} character={character} />
       ))}

@@ -5,7 +5,7 @@ import { classNames } from '@rain-cafe/react-utils';
 import { BadgePlus } from 'lucide-react';
 import { Alice } from 'next/font/google';
 import Link from 'next/link';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Profile } from './Profile';
 import { Button } from './ui/button';
 
@@ -14,18 +14,6 @@ const font = Alice({
   subsets: ['latin'],
   fallback: ['serif'],
 });
-
-export function isEnv(environment: NodeJS.ProcessEnv['NODE_ENV'], generator: () => ReactNode): ReactNode {
-  if (process.env.NODE_ENV === environment) {
-    return generator();
-  }
-
-  return null;
-}
-
-export function isDevelopment(generator: () => ReactNode): ReactNode {
-  return isEnv('development', generator);
-}
 
 export function Header() {
   const ref = useRef<HTMLDivElement>(null);
