@@ -1,32 +1,30 @@
 import { Character, Prisma, PrismaClient } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 
-let initialized = false;
-
-export const prisma = new PrismaClient().$extends(
-  Prisma.defineExtension({
-    name: 'encrypt-password',
-    query: {
-      user: {
-        async $allOperations({ operation, args, query }) {
-          if (
-            (operation === 'create' || operation === 'update') &&
-            args.data.password &&
-            !/^\$2(?:a|b)\$/.test(args.data.password.toString())
-          ) {
-            args.data.password = hashSync(args.data.password.toString(), 10);
-          }
-
-          return query(args);
-        },
-      },
-    },
-  })
-);
+let prisma: PrismaClient | null = null;
 
 export async function getDatabase() {
-  if (!initialized) {
-    initialized = true;
+  if (!prisma) {
+    prisma = new PrismaClient().$extends(
+      Prisma.defineExtension({
+        name: 'encrypt-password',
+        query: {
+          user: {
+            async $allOperations({ operation, args, query }) {
+              if (
+                (operation === 'create' || operation === 'update') &&
+                args.data.password &&
+                !/^\$2(?:a|b)\$/.test(args.data.password.toString())
+              ) {
+                args.data.password = hashSync(args.data.password.toString(), 10);
+              }
+
+              return query(args);
+            },
+          },
+        },
+      })
+    ) as PrismaClient;
 
     if (process.env.NODE_ENV !== 'production') {
       // Seed some dummy data

@@ -15,8 +15,8 @@ export function CharacterCard({ character }: CharacterCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col sm:flex-row gap-4">
-        <div className="relative min-w-52 min-h-52 rounded-lg overflow-hidden aspect-square">
-          <Image fill src="/profile.png" alt="character profile" />
+        <div className="relative flex-auto aspect-square">
+          <Image className="rounded-lg" fill src="/profile.png" alt="character profile" />
         </div>
       </CardContent>
     </Card>

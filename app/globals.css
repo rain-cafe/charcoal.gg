@@ -72,5 +72,20 @@
   }
   body {
     @apply bg-background text-foreground;
+
+    background-size: 100% 100%;
+    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
+      0px 0px;
+    background-image: linear-gradient(125deg, hsl(var(--background) / 0.25) 1%, hsl(var(--accent) / 0.5) 100%),
+      radial-gradient(18vw 28vh at 24vw 50vh, hsl(var(--accent)) 7%, hsl(var(--background) / 0) 100%),
+      radial-gradient(18vw 28vh at 18vw 71vh, hsl(var(--accent)) 6%, hsl(var(--background) / 0) 100%),
+      radial-gradient(70vw 53vh at 36vw 76vh, hsl(var(--accent)) 0%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(42vw 53vh at 15vw 94vh, hsl(var(--primary)) 7%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(42vw 53vh at 34vw 72vh, hsl(var(--primary)) 7%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(18vw 28vh at 35vw 87vh, hsl(var(--accent)) 7%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(31vw 43vh at 7vw 98vh, hsl(var(--accent)) 24%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(21vw 37vh at 72vw 23vh, hsl(var(--secondary) / 0.35) 24%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(35vw 56vh at 91vw 74vh, hsl(var(--primary)) 9%, hsl(var(--background) / 0.35) 100%),
+      radial-gradient(74vw 86vh at 67vw 38vh, hsl(var(--secondary) / 0.35) 24%, hsl(var(--background) / 0.35) 100%);
   }
 }
