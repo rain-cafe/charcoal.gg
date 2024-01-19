@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - main
+      - alpha
   push:
     branches:
       - main
+      - alpha
 
 jobs:
   install:
@@ -78,11 +80,11 @@ jobs:
 
   deploy:
     name: Deploy
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha')
     runs-on: ubuntu-latest
     environment:
-      name: live
-      url: https://charcoal.gg
+      name: ${{ github.ref_name == 'main' && 'live' || github.ref_name }}
+      url: ${{ github.ref_name == 'main' && 'https://charcoal.gg' || format('https://{0}--charcoal-gg.netlify.app', github.ref_name) }}
     needs: [lint, test, build]
     steps:
       - run: echo "Deployed to Netlify"

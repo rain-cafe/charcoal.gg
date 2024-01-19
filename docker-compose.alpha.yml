@@ -1,0 +1,19 @@
+# docker-compose.yml
+
+version: '3.8'
+services:
+  charcoal_db_alpha:
+    image: postgres:13.5
+    container_name: charcoal-db-alpha
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=charcoal
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - charcoal_db_alpha:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+volumes:
+  charcoal_db_alpha:
+    driver: local
