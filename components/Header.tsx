@@ -79,7 +79,7 @@ export function Header() {
           </Button>
         ))}
         <Button variant="secondary" className="ml-auto">
-          <BadgePlus />
+          <BadgePlus className="size-6" />
         </Button>
         <Profile />
       </div>
