@@ -83,19 +83,21 @@ export function Header() {
             </Link>
           </Button>
         ))}
-        <Button variant="secondary" className="ml-auto">
-          <BadgePlus className="size-6" />
-        </Button>
+      </div>
+      <Button variant="secondary" className="ml-auto" size="icon">
+        <BadgePlus className="size-6" />
+      </Button>
+      <div className="hidden md:flex">
         <Profile />
       </div>
-      <div className="md:hidden ml-auto">
-        <Button variant="ghost" className="ml-auto" onClick={() => setIsOpen(true)}>
+      <div className="md:hidden">
+        <Button variant="ghost" size="icon" className="ml-auto" onClick={() => setIsOpen(true)}>
           <Menu />
         </Button>
       </div>
       <div
         className={cn(
-          'fixed z-10 inset-0 md:hidden transition-opacity opacity-0 pointer-events-none',
+          'fixed z-10 inset-0 transition-opacity opacity-0 pointer-events-none',
           isOpen && 'opacity-100 pointer-events-auto'
         )}
         role="dialog"
@@ -110,7 +112,7 @@ export function Header() {
             >
               Charcoal
             </Link>
-            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
               <X />
             </Button>
           </div>
