@@ -31,10 +31,7 @@ const FEATURE_FLAGS: Record<FeatureFlag, FeatureFlagValue> = {
     [Environment.Local]: true,
     [Environment.Alpha]: true,
   },
-  [FeatureFlag.Characters]: {
-    [Environment.Local]: true,
-    [Environment.Alpha]: true,
-  },
+  [FeatureFlag.Characters]: true,
 };
 
 export const ENVIRONMENT: Environment =

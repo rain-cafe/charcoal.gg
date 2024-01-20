@@ -38,7 +38,7 @@ const links: Header.Link[] = (
       flag: FeatureFlag.Characters,
     },
   ] satisfies Header.Link[]
-).filter((link) => !link.flag || EnvironmentService.enabled(link.flag));
+).filter((link) => typeof link.flag === 'undefined' || EnvironmentService.enabled(link.flag));
 
 export function Header() {
   const pathname = usePathname();
