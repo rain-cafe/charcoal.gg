@@ -1,12 +1,16 @@
 'use client';
-import { EnvironmentService, FeatureFlag } from '@/backend/services/environment.service';
+import { FeatureFlag } from '@/backend/services/environment.service';
 import { cn } from '@/lib/utils';
 import { classNames } from '@rain-cafe/react-utils';
-import { BadgePlus, Dices, LucideIcon, Menu, NotebookPen, Swords, X } from 'lucide-react';
+import { LucideIcon, Menu, NotebookPen, Swords, X } from 'lucide-react';
 import { Alice } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { IconType } from 'react-icons';
+import { FaDiceD20 } from 'react-icons/fa6';
+import { AddDropdown } from './AddDropdown';
+import { NavigationList } from './NavigationList';
 import { Profile } from './Profile';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
@@ -17,28 +21,26 @@ const font = Alice({
   fallback: ['serif'],
 });
 
-const links: Header.Link[] = (
-  [
-    {
-      label: 'Campaigns',
-      href: '/campaigns',
-      icon: Dices,
-      flag: FeatureFlag.Campaigns,
-    },
-    {
-      label: 'Games',
-      href: '/games',
-      icon: NotebookPen,
-      flag: FeatureFlag.Games,
-    },
-    {
-      label: 'Characters',
-      href: '/characters',
-      icon: Swords,
-      flag: FeatureFlag.Characters,
-    },
-  ] satisfies Header.Link[]
-).filter((link) => typeof link.flag === 'undefined' || EnvironmentService.enabled(link.flag));
+const items: NavigationList.Action<typeof Button>[] = [
+  {
+    label: 'Campaigns',
+    href: '/campaigns',
+    icon: FaDiceD20,
+    flag: FeatureFlag.Campaigns,
+  },
+  {
+    label: 'Games',
+    href: '/games',
+    icon: NotebookPen,
+    flag: FeatureFlag.Games,
+  },
+  {
+    label: 'Characters',
+    href: '/characters',
+    icon: Swords,
+    flag: FeatureFlag.Characters,
+  },
+];
 
 export function Header() {
   const pathname = usePathname();
@@ -75,18 +77,10 @@ export function Header() {
         Charcoal
       </Link>
       <div className="hidden md:flex gap-4 flex-1">
-        {links.map((link, index) => (
-          <Button key={index} variant="secondary" asChild>
-            <Link href={link.href}>
-              {link.icon && <link.icon className="mr-2 size-5" />}
-              {link.label}
-            </Link>
-          </Button>
-        ))}
+        <NavigationList items={items} as={Button} variant="ghost" />
       </div>
-      <Button variant="secondary" className="ml-auto" size="icon">
-        <BadgePlus className="size-6" />
-      </Button>
+      <span className="flex-1" />
+      <AddDropdown />
       <div className="hidden md:flex">
         <Profile />
       </div>
@@ -119,14 +113,7 @@ export function Header() {
           <div className="mt-6 flex flex-col gap-4">
             <Profile mobile />
             <Separator decorative />
-            {links.map((link, index) => (
-              <Button key={index} variant="ghost" className="gap-4 justify-between" asChild>
-                <Link href={link.href}>
-                  {link.label}
-                  {link.icon && <link.icon />}
-                </Link>
-              </Button>
-            ))}
+            <NavigationList items={items} as={Button} variant="ghost" flip />
           </div>
         </div>
       </div>
@@ -138,7 +125,7 @@ export namespace Header {
   export type Link = {
     label: string;
     href: string;
-    icon?: LucideIcon;
+    icon?: LucideIcon | IconType;
     flag?: FeatureFlag;
   };
 }
