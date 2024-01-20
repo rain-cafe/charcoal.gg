@@ -1,5 +1,5 @@
 'use client';
-import { FeatureFlag, FeatureFlagService } from '@/backend/services/feature-flags.service';
+import { EnvironmentService, FeatureFlag } from '@/backend/services/environment.service';
 import { cn } from '@/lib/utils';
 import { classNames } from '@rain-cafe/react-utils';
 import { BadgePlus, Dices, LucideIcon, Menu, NotebookPen, Swords, X } from 'lucide-react';
@@ -38,7 +38,7 @@ const links: Header.Link[] = (
       flag: FeatureFlag.Characters,
     },
   ] satisfies Header.Link[]
-).filter((link) => !link.flag || FeatureFlagService.enabled(link.flag));
+).filter((link) => !link.flag || EnvironmentService.enabled(link.flag));
 
 export function Header() {
   const pathname = usePathname();

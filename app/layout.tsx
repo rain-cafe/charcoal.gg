@@ -1,6 +1,8 @@
+import { EnvironmentService } from '@/backend/services/environment.service';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { cn } from '@/lib/utils';
+import { Ribbon } from '@rain-cafe/ribbon';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { Roboto } from 'next/font/google';
@@ -32,12 +34,15 @@ export const metadata: Metadata = {
   },
 };
 
+const { ribbon } = EnvironmentService;
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
 
   return (
     <html lang="en">
       <body className={cn('flex flex-col min-h-screen font-sans antialiased dark', font.variable)}>
+        {ribbon && <Ribbon {...ribbon}>{ribbon.label}</Ribbon>}
         <div
           className={cn('max-w-screen-2xl w-full flex flex-col gap-4 p-4 pt-12 mx-auto min-h-screen', font.variable)}
         >
