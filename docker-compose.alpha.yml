@@ -1,6 +1,7 @@
 # docker-compose.yml
 
 version: '3.8'
+name: charcoal-alpha
 services:
   charcoal_db_alpha:
     image: postgres:13.5
@@ -13,7 +14,7 @@ services:
     volumes:
       - charcoal_db_alpha:/var/lib/postgresql/data
     ports:
-      - 5433:5432
+      - 10005:5432
 volumes:
   charcoal_db_alpha:
     driver: local
