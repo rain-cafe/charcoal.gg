@@ -16,7 +16,13 @@ export function CharacterCard({ character }: CharacterCardProps) {
       </CardHeader>
       <CardContent className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-auto aspect-square">
-          <Image className="rounded-lg" fill src="/profile.png" alt="character profile" />
+          <Image
+            className="rounded-lg"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            src="/profile.png"
+            alt="character profile"
+          />
         </div>
       </CardContent>
     </Card>

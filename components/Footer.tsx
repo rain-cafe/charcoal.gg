@@ -13,13 +13,13 @@ export function Footer() {
       <div className="flex-1 hidden sm:flex">Made with ❤️ by the Rainbow Cafe Team~</div>
       <Button variant="secondary" asChild>
         <Link href="https://github.com/rain-cafe/charcoal.gg/discussions" target="_blank">
-          <LifeBuoy className="md:mr-2 size-5" />
+          <LifeBuoy className="md:mr-2 size-6 md:size-5" />
           <span className="hidden md:flex">Support</span>
         </Link>
       </Button>
       <Button variant="secondary" asChild>
         <Link href="https://github.com/rain-cafe/charcoal.gg" target="_blank">
-          <Code2 className="md:mr-2 size-5" />
+          <Code2 className="md:mr-2 size-6 md:size-5" />
           <span className="hidden md:flex">Source Code</span>
         </Link>
       </Button>
