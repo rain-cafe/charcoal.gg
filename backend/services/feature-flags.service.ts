@@ -31,12 +31,12 @@ const FEATURE_FLAGS: Record<FeatureFlag, FeatureFlagValue> = {
   },
 };
 
-export class FeatureFlagService {
-  static readonly environment: Environment =
-    process.env.ENVIRONMENT && Object.values(Environment).includes(process.env.ENVIRONMENT as Environment)
-      ? (process.env.ENVIRONMENT as Environment)
-      : Environment.Local;
+export const environment: Environment =
+  process.env.ENVIRONMENT && Object.values(Environment).includes(process.env.ENVIRONMENT as Environment)
+    ? (process.env.ENVIRONMENT as Environment)
+    : Environment.Local;
 
+export class FeatureFlagService {
   /**
    * Retrieves the feature flag for the current environment
    * @param flag The flag to retrieve
@@ -48,7 +48,7 @@ export class FeatureFlagService {
 
     if (typeof value === 'boolean') return value;
 
-    return value[this.environment] ?? defaultValue;
+    return value[environment] ?? defaultValue;
   }
 
   /**
