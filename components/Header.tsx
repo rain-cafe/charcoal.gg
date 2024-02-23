@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Profile } from './Profile';
 import { Button } from './ui/button';
+import { Separator } from './ui/separator';
 
 const font = Alice({
   weight: ['400'],
@@ -114,6 +115,8 @@ export function Header() {
             </Button>
           </div>
           <div className="mt-6 flex flex-col gap-4">
+            <Profile mobile />
+            <Separator decorative />
             {links.map((link, index) => (
               <Button key={index} variant="ghost" className="gap-4 justify-between" asChild>
                 <Link href={link.href}>
