@@ -37,17 +37,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'max-w-screen-2xl flex flex-col gap-4 p-4 pt-12 mx-auto min-h-screen font-sans antialiased dark',
-          font.variable
-        )}
-      >
-        <SessionProvider session={session}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SessionProvider>
+      <body className={cn('flex flex-col min-h-screen font-sans antialiased dark', font.variable)}>
+        <div
+          className={cn('max-w-screen-2xl w-full flex flex-col gap-4 p-4 pt-12 mx-auto min-h-screen', font.variable)}
+        >
+          <SessionProvider session={session}>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </SessionProvider>
+        </div>
       </body>
     </html>
   );

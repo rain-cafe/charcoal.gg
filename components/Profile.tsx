@@ -1,5 +1,5 @@
 'use client';
-import { Code2, LifeBuoy, LogOut, LucideIcon, User, UserRound } from 'lucide-react';
+import { LogOut, LucideIcon, User, UserRound } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -90,30 +90,25 @@ export function Profile({ className, mobile = false }: ProfileProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/profile">
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="https://github.com/rain-cafe/charcoal.gg/discussions" target="_blank">
-            <LifeBuoy className="mr-2 h-4 w-4" />
-            <span>Support</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="https://github.com/rain-cafe/charcoal.gg" target="_blank">
-            <Code2 className="mr-2 h-4 w-4" />
-            <span>Source Code</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
-        </DropdownMenuItem>
+        {links.map((link, index) => {
+          if (link.href) {
+            return (
+              <DropdownMenuItem asChild key={index}>
+                <Link href={link.href}>
+                  {link.icon && <link.icon className="mr-2 h-4 w-4" />}
+                  <span>{link.label}</span>
+                </Link>
+              </DropdownMenuItem>
+            );
+          }
+
+          return (
+            <DropdownMenuItem key={index} onClick={link.onClick}>
+              {link.icon && <link.icon className="mr-2 h-4 w-4" />}
+              <span>{link.label}</span>
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
