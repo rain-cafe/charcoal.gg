@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { Roboto } from 'next/font/google';
-import Head from 'next/head';
 import { auth } from './api/auth/[...nextauth]/auth';
 import './globals.css';
 
@@ -17,6 +16,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://charcoal.gg'),
   title: 'Charcoal',
   description: 'The next generation of TTRPG',
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: 'Charcoal',
     type: 'website',
@@ -34,13 +36,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased dark', font.variable)}>
+      <body
+        className={cn(
+          'max-w-screen-2xl pt -12 flex flex-col gap-4 p-4 mx-auto min-h-[200vh] font-sans antialiased dark',
+          font.variable
+        )}
+      >
         <SessionProvider session={session}>
           <Header />
-          <main className="flex-auto w-full max-w-screen-2xl px-4 py-4 mx-auto sm:px-6 md:py-6">{children}</main>
+          <main className="rounded-lg overflow-hidden w-full bg-background/70 p-8">{children}</main>
         </SessionProvider>
       </body>
     </html>
