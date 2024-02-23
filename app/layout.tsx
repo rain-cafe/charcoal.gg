@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body
         className={cn(
-          'max-w-screen-2xl pt -12 flex flex-col gap-4 p-4 mx-auto min-h-screen font-sans antialiased dark',
+          'max-w-screen-2xl flex flex-col gap-4 p-4 pt-12 mx-auto min-h-screen font-sans antialiased dark',
           font.variable
         )}
       >

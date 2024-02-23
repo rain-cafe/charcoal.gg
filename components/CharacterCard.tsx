@@ -10,7 +10,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
+        <CardTitle className="flex justify-between items-center text-nowrap whitespace-nowrap">
           {character.first_name} {character.last_name}
         </CardTitle>
       </CardHeader>

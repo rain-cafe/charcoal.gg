@@ -1,26 +1,42 @@
 export enum FeatureFlag {
   Campaigns,
   Games,
+  Characters,
+}
+
+export enum Environment {
+  Live = 'live',
+  Alpha = 'alpha',
+  Local = 'local',
 }
 
 export type FeatureFlagValue =
   | boolean
   | {
-      [key in NodeJS.ProcessEnv['NODE_ENV']]?: boolean;
+      [key in Environment]?: boolean;
     };
 
 const FEATURE_FLAGS: Record<FeatureFlag, FeatureFlagValue> = {
   [FeatureFlag.Campaigns]: {
-    development: true,
-    test: true,
+    [Environment.Local]: true,
+    [Environment.Alpha]: true,
   },
   [FeatureFlag.Games]: {
-    development: true,
-    test: true,
+    [Environment.Local]: true,
+    [Environment.Alpha]: true,
+  },
+  [FeatureFlag.Characters]: {
+    [Environment.Local]: true,
+    [Environment.Alpha]: true,
   },
 };
 
 export class FeatureFlagService {
+  static readonly environment: Environment =
+    process.env.ENVIRONMENT && Object.values(Environment).includes(process.env.ENVIRONMENT as Environment)
+      ? (process.env.ENVIRONMENT as Environment)
+      : Environment.Local;
+
   /**
    * Retrieves the feature flag for the current environment
    * @param flag The flag to retrieve
@@ -32,7 +48,7 @@ export class FeatureFlagService {
 
     if (typeof value === 'boolean') return value;
 
-    return value[process.env.NODE_ENV] ?? defaultValue;
+    return value[this.environment] ?? defaultValue;
   }
 
   /**

@@ -9,17 +9,18 @@ export function Footer() {
 
   return (
     <div className={'rounded-lg flex bg-background/70 border border-secondary items-center p-4 py-2 gap-4'} ref={ref}>
-      <div className="flex-1">Made with ❤️ by the Rainbow Cafe Team~</div>
+      <div className="flex-1 sm:hidden">Made with ❤️</div>
+      <div className="flex-1 hidden sm:flex">Made with ❤️ by the Rainbow Cafe Team~</div>
       <Button variant="secondary" asChild>
         <Link href="https://github.com/rain-cafe/charcoal.gg/discussions" target="_blank">
-          <LifeBuoy className="mr-2 h-4 w-4" />
-          <span>Support</span>
+          <LifeBuoy className="md:mr-2 size-5" />
+          <span className="hidden md:flex">Support</span>
         </Link>
       </Button>
       <Button variant="secondary" asChild>
         <Link href="https://github.com/rain-cafe/charcoal.gg" target="_blank">
-          <Code2 className="mr-2 h-4 w-4" />
-          <span>Source Code</span>
+          <Code2 className="md:mr-2 size-5" />
+          <span className="hidden md:flex">Source Code</span>
         </Link>
       </Button>
     </div>
