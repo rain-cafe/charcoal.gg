@@ -1,3 +1,4 @@
+import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
@@ -38,13 +39,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body
         className={cn(
-          'max-w-screen-2xl pt -12 flex flex-col gap-4 p-4 mx-auto min-h-[200vh] font-sans antialiased dark',
+          'max-w-screen-2xl pt -12 flex flex-col gap-4 p-4 mx-auto min-h-screen font-sans antialiased dark',
           font.variable
         )}
       >
         <SessionProvider session={session}>
           <Header />
-          <main className="rounded-lg overflow-hidden w-full bg-background/70 p-8">{children}</main>
+          <main className="flex-1">{children}</main>
+          <Footer />
         </SessionProvider>
       </body>
     </html>
