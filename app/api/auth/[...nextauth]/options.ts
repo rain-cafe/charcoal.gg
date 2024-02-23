@@ -10,7 +10,6 @@ const credentialTypes = {
 
 export const options: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
-  debug: process.env.NODE_ENV === 'development',
   providers: [
     CredentialsProvider({
       name: 'Email',
