@@ -4,7 +4,7 @@ import { exec } from 'child_process';
 
 let initialized = false;
 
-const prisma = new PrismaClient().$extends(
+export const prisma = new PrismaClient().$extends(
   Prisma.defineExtension({
     name: 'encrypt-password',
     query: {
@@ -45,13 +45,11 @@ export async function getDatabase() {
     if (count === 0) {
       const user = await prisma.user.create({
         data: {
-          email: 'test@rains.cafe',
-          display_name: 'admin',
+          email: 'admin@rains.cafe',
           password: 'admin',
+          image: 'https://gravatar.com/avatar/9619c9d1cd8923853025f851faf6dadbd26a0f56c6ec70a4088482b5d22c1abd?d=404',
         },
       });
-
-      console.log(user.id);
 
       await prisma.character.createMany({
         data: Array(200)

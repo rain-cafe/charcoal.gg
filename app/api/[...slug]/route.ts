@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export type Context<T extends object> = {
   params: T;
@@ -10,7 +10,6 @@ export type CharacterRouteContext = Context<{
 
 export const dynamic = 'force-static';
 export async function GET(request: NextRequest, { params }: CharacterRouteContext) {
-  console.log('test');
   return Response.json(
     {
       status: 400,
