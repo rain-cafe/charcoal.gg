@@ -3,11 +3,12 @@ import { LogOut, LucideIcon, User, UserRound } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
+import { Button, ButtonProps } from './ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuItemProps,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -27,6 +28,7 @@ const links: Profile.Action[] = [
   {
     label: 'Log out',
     icon: LogOut,
+    variant: 'destructive',
     onClick: () => signOut(),
   },
 ];
@@ -55,21 +57,29 @@ export function Profile({ className, mobile = false }: ProfileProps) {
           <span>{session.user.email}</span>
         </div>
         {links.map((link, index) => {
+          const baseProps: Pick<ButtonProps, 'variant' | 'className'> = {
+            variant: link.variant ?? 'ghost',
+            className: 'gap-4 justify-between',
+          };
+
+          const content = (
+            <>
+              {link.label}
+              {link.icon && <link.icon />}
+            </>
+          );
+
           if (link.href) {
             return (
-              <Button key={index} variant="ghost" className="gap-4 justify-between" asChild>
-                <Link href={link.href}>
-                  {link.label}
-                  {link.icon && <link.icon />}
-                </Link>
+              <Button key={index} {...baseProps} asChild>
+                <Link href={link.href}>{content}</Link>
               </Button>
             );
           }
 
           return (
-            <Button key={index} variant="ghost" className="gap-4 justify-between" onClick={link.onClick}>
-              {link.label}
-              {link.icon && <link.icon />}
+            <Button key={index} {...baseProps} onClick={link.onClick}>
+              {content}
             </Button>
           );
         })}
@@ -87,28 +97,38 @@ export function Profile({ className, mobile = false }: ProfileProps) {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent className="w-52" align="end" alignOffset={-16}>
+        <DropdownMenuLabel className="text-md">My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {links.map((link, index) => {
-          if (link.href) {
+        <div className="flex flex-col gap-1">
+          {links.map((link, index) => {
+            const baseProps: Pick<DropdownMenuItemProps, 'variant' | 'className'> = {
+              variant: link.variant,
+              className: 'text-sm flex justify-between gap-4',
+            };
+
+            const content = (
+              <>
+                <span>{link.label}</span>
+                {link.icon && <link.icon className="size-6" />}
+              </>
+            );
+
+            if (link.href) {
+              return (
+                <DropdownMenuItem {...baseProps} key={index} asChild>
+                  <Link href={link.href}>{content}</Link>
+                </DropdownMenuItem>
+              );
+            }
+
             return (
-              <DropdownMenuItem asChild key={index}>
-                <Link href={link.href}>
-                  {link.icon && <link.icon className="mr-2 h-4 w-4" />}
-                  <span>{link.label}</span>
-                </Link>
+              <DropdownMenuItem {...baseProps} key={index} onClick={link.onClick}>
+                {content}
               </DropdownMenuItem>
             );
-          }
-
-          return (
-            <DropdownMenuItem key={index} onClick={link.onClick}>
-              {link.icon && <link.icon className="mr-2 h-4 w-4" />}
-              <span>{link.label}</span>
-            </DropdownMenuItem>
-          );
-        })}
+          })}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -118,6 +138,7 @@ export namespace Profile {
   interface BaseAction {
     label: string;
     icon?: LucideIcon;
+    variant?: DropdownMenuItemProps['variant'];
   }
 
   interface LinkAction extends BaseAction {
