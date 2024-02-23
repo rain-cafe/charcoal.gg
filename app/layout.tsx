@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={cn('min-h-screen bg-background font-sans antialiased dark', font.variable)}>
         <SessionProvider session={session}>
           <Header />
-          <main className="flex-auto w-full max-w-3xl px-4 py-4 mx-auto sm:px-6 md:py-6">{children}</main>
+          <main className="flex-auto w-full max-w-screen-2xl px-4 py-4 mx-auto sm:px-6 md:py-6">{children}</main>
         </SessionProvider>
       </body>
     </html>
