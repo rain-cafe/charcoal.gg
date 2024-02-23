@@ -1,11 +1,14 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
 import { Navbar } from '@/components/Navbar';
-import * as styles from './layout.module.scss';
 import { classNames } from '@rain-cafe/react-utils';
+import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+import './globals.css';
+import * as styles from './layout.module.scss';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = Roboto({
+  weight: ['100', '300', '400', '500', '700', '900'],
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={classNames(inter.className, styles.body)}>
+      <body className={classNames(font.className, styles.body)}>
         <Navbar />
         {children}
       </body>

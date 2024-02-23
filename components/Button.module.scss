@@ -1,0 +1,32 @@
+.button,
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  min-height: 40px;
+  border-radius: 10px;
+  color: rgb(240, 240, 240);
+  background-color: var(--primary);
+  font-weight: bold;
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--text);
+  }
+
+  transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-property: background-color, color;
+}
+
+.button {
+  padding: 0 10px;
+}
+
+.iconButton {
+  aspect-ratio: 1/1;
+}
