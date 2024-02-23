@@ -1,9 +1,9 @@
 'use client';
 import { LogOut, LucideIcon, User, UserRound } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { NavigationList } from './NavigationList';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button, ButtonProps } from './ui/button';
+import { Button } from './ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +19,7 @@ export type ProfileProps = {
   mobile?: boolean;
 };
 
-const links: Profile.Action[] = [
+const items: NavigationList.Action<typeof Button | typeof DropdownMenuItem>[] = [
   {
     label: 'Your Profile',
     href: '/profile',
@@ -56,33 +56,7 @@ export function Profile({ className, mobile = false }: ProfileProps) {
           </Avatar>
           <span>{session.user.email}</span>
         </div>
-        {links.map((link, index) => {
-          const baseProps: Pick<ButtonProps, 'variant' | 'className'> = {
-            variant: link.variant ?? 'ghost',
-            className: 'gap-4 justify-between',
-          };
-
-          const content = (
-            <>
-              {link.label}
-              {link.icon && <link.icon />}
-            </>
-          );
-
-          if (link.href) {
-            return (
-              <Button key={index} {...baseProps} asChild>
-                <Link href={link.href}>{content}</Link>
-              </Button>
-            );
-          }
-
-          return (
-            <Button key={index} {...baseProps} onClick={link.onClick}>
-              {content}
-            </Button>
-          );
-        })}
+        <NavigationList items={items} as={Button} variant="ghost" />
       </>
     );
   }
@@ -101,33 +75,7 @@ export function Profile({ className, mobile = false }: ProfileProps) {
         <DropdownMenuLabel className="text-md">My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <div className="flex flex-col gap-1">
-          {links.map((link, index) => {
-            const baseProps: Pick<DropdownMenuItemProps, 'variant' | 'className'> = {
-              variant: link.variant,
-              className: 'text-sm flex justify-between gap-4',
-            };
-
-            const content = (
-              <>
-                <span>{link.label}</span>
-                {link.icon && <link.icon className="size-6" />}
-              </>
-            );
-
-            if (link.href) {
-              return (
-                <DropdownMenuItem {...baseProps} key={index} asChild>
-                  <Link href={link.href}>{content}</Link>
-                </DropdownMenuItem>
-              );
-            }
-
-            return (
-              <DropdownMenuItem {...baseProps} key={index} onClick={link.onClick}>
-                {content}
-              </DropdownMenuItem>
-            );
-          })}
+          <NavigationList items={items} as={DropdownMenuItem} />
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
