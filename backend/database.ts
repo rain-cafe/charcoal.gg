@@ -28,31 +28,35 @@ export async function getDatabase() {
   if (!initialized) {
     initialized = true;
 
-    const count = await prisma.user.count();
+    if (process.env.NODE_ENV !== 'production') {
+      // Seed some dummy data
+      // TODO: Extract this out somehow
+      const count = await prisma.user.count();
 
-    if (count === 0) {
-      const user = await prisma.user.create({
-        data: {
-          email: 'admin@rains.cafe',
-          password: 'admin',
-          image: 'https://gravatar.com/avatar/9619c9d1cd8923853025f851faf6dadbd26a0f56c6ec70a4088482b5d22c1abd?d=404',
-        },
-      });
+      if (count === 0) {
+        const user = await prisma.user.create({
+          data: {
+            email: 'admin@rains.cafe',
+            password: 'admin',
+            image: 'https://gravatar.com/avatar/9619c9d1cd8923853025f851faf6dadbd26a0f56c6ec70a4088482b5d22c1abd?d=404',
+          },
+        });
 
-      await prisma.character.createMany({
-        data: Array(200)
-          .fill(null)
-          .map<Omit<Character, 'id'>>((_, index) => ({
-            age: 21,
-            gender: 'female',
-            first_name: 'Luna',
-            last_name: 'Evergreen',
-            description:
-              'Luna has a long face, with black hair and bright blue eyes. She wears studded leather and wields a warhammer. Luna has a grey wolf named Ariendel.',
-            bio: '',
-            creator_id: user.id,
-          })),
-      });
+        await prisma.character.createMany({
+          data: Array(200)
+            .fill(null)
+            .map<Omit<Character, 'id'>>((_, index) => ({
+              age: 21,
+              gender: 'female',
+              first_name: 'Luna',
+              last_name: 'Evergreen',
+              description:
+                'Luna has a long face, with black hair and bright blue eyes. She wears studded leather and wields a warhammer. Luna has a grey wolf named Ariendel.',
+              bio: '',
+              creator_id: user.id,
+            })),
+        });
+      }
     }
   }
 
