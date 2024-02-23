@@ -5,6 +5,7 @@ import { classNames } from '@rain-cafe/react-utils';
 import { BadgePlus, Dices, LucideIcon, Menu, NotebookPen, Swords, X } from 'lucide-react';
 import { Alice } from 'next/font/google';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Profile } from './Profile';
 import { Button } from './ui/button';
@@ -39,20 +40,23 @@ const links: Header.Link[] = (
 ).filter((link) => !link.flag || FeatureFlagService.enabled(link.flag));
 
 export function Header() {
+  const pathname = usePathname();
   const [isPinned, setIsPinned] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const listener = () => {
-      setIsPinned(window.scrollY > 0);
-    };
+    setIsOpen(false);
+  }, [pathname]);
 
-    window.addEventListener('scroll', listener, {
+  useEffect(() => {
+    const onScroll = () => setIsPinned(window.scrollY > 0);
+
+    window.addEventListener('scroll', onScroll, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener('scroll', listener);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
