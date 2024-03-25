@@ -24,5 +24,6 @@
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
-  "typescript.preferences.autoImportFileExcludePatterns": ["**/node_modules/@radix-ui/**"]
+  "typescript.preferences.autoImportFileExcludePatterns": ["**/node_modules/@radix-ui/**"],
+  "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix"
 }

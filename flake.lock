@@ -1,0 +1,46 @@
+{
+  "nodes": {
+    "nix-shells": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1711338181,
+        "narHash": "sha256-gYyClRO84QcjY5kTn83QFTSlCZshcxm0JRGSr1bt3e4=",
+        "owner": "cecilia-sanare",
+        "repo": "nix-shells",
+        "rev": "980d30f931ce0d793ddbd3bd9737b04844306557",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cecilia-sanare",
+        "ref": "main",
+        "repo": "nix-shells",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1711001935,
+        "narHash": "sha256-URtGpHue7HHZK0mrHnSf8wJ6OmMKYSsoLmJybrOLFSQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "20f77aa09916374aa3141cbc605c955626762c9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nix-shells": "nix-shells"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
