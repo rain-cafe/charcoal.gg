@@ -4,7 +4,7 @@
   <br>
   <div>
     <a href="https://charcoal.gg">
-      <img src="https://raw.githubusercontent.com/rain-cafe/logos/main/charcoal/logo.png?sanitize=true">
+      <img src="https://raw.githubusercontent.com/ribbon-studios/logos/main/charcoal/logo.png?sanitize=true">
     </a>
   </div>
 </h2>

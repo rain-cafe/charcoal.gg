@@ -1,7 +1,7 @@
 'use client';
 import { FeatureFlag } from '@/backend/services/environment.service';
 import { cn } from '@/lib/utils';
-import { classNames } from '@rain-cafe/react-utils';
+import { classNames } from '@ribbon-studios/react-utils';
 import { LucideIcon, Menu, NotebookPen, Swords, X } from 'lucide-react';
 import { Alice } from 'next/font/google';
 import Link from 'next/link';

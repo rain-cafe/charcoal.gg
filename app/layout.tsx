@@ -2,7 +2,7 @@ import { EnvironmentService } from '@/backend/services/environment.service';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { cn } from '@/lib/utils';
-import { Ribbon } from '@rain-cafe/ribbon';
+import { Ribbon } from '@ribbon-studios/ribbon';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { Roboto } from 'next/font/google';
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     description: 'The next generation of TTRPG',
-    images: 'https://raw.githubusercontent.com/rain-cafe/logos/main/charcoal/social-media.png',
+    images: 'https://raw.githubusercontent.com/ribbon-studios/logos/main/charcoal/social-media.png',
   },
   twitter: {
     card: 'summary_large_image',
